@@ -4,6 +4,9 @@ import { auth } from "@clerk/nextjs/server";
 import { clerkClient } from "@clerk/nextjs/server";
 import { Octokit } from "octokit";
 import pLimit from "p-limit";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "../../../convex/_generated/api";
+import { inngest } from "@/inngest/client";
 
 // ========================================
 // GETTING GITHUB ACCESS TOKEN FROM CLERK
@@ -849,9 +852,6 @@ export async function getCommitDetails(
 // =================================
 // HANDLE PUSH EVENT
 // =================================
-import { ConvexHttpClient } from "convex/browser";
-import { api } from "../../../convex/_generated/api";
-import { inngest } from "@/inngest/client";
 
 export async function handlePushEvent(payload: any) {
   const { repository, commits, pusher, sender } = payload;
@@ -871,7 +871,7 @@ export async function handlePushEvent(payload: any) {
     console.log("Repository not found in database:", repository.full_name);
     return { message: "Repository not found", status: "skipped" };
   }
-
+  console.log("REPODATA.USERID  from the convex fetch-------------->",repoData.userId)
   const userData = await convex.query(api.users.getUser, {
     userId: repoData.userId,
   });

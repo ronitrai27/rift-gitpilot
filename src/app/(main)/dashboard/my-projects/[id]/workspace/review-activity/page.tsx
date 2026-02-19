@@ -417,7 +417,7 @@ const ReviewItem = ({ review }: { review: Review }) => {
                 src={review.authorAvatar}
                 alt={review.authorUserName}
               />
-              <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/10 text-primary font-bold">
+              <AvatarFallback className="bg-linear-to-br from-primary/20 to-primary/10 text-primary font-bold">
                 {review.authorUserName?.substring(0, 2).toUpperCase() || "AI"}
               </AvatarFallback>
             </Avatar>
@@ -425,7 +425,7 @@ const ReviewItem = ({ review }: { review: Review }) => {
               <span className="text-xs text-muted-foreground font-medium">
                 Action done by
               </span>
-              <span className="text-base font-semibold text-foreground group-hover/card:text-primary transition-colors">
+              <span className="text-base font-medium tracking-tight whitespace-nowrap truncate max-w-[160px] text-foreground group-hover/card:text-primary transition-colors">
                 {review.authorUserName || "System Agent"}
               </span>
             </div>
@@ -433,17 +433,17 @@ const ReviewItem = ({ review }: { review: Review }) => {
 
           <div className="flex items-center gap-2">
             {review.reviewStatus === "completed" ? (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/5 text-green-600 border border-green-500/20 text-xs  animate-in fade-in zoom-in duration-300">
+              <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-green-500/5 text-green-600 border border-green-500/20 text-xs  animate-in fade-in zoom-in duration-300">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Review Completed</span>
               </div>
             ) : review.reviewStatus === "failed" ? (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-500/10 text-red-600 border border-red-500/20 text-sm font-medium">
+              <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-red-500/10 text-red-600 border border-red-500/20 text-sm font-medium">
                 <AlertCircle className="w-4 h-4" />
                 <span>Review Failed</span>
               </div>
             ) : (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-yellow-500/10 text-yellow-600 border border-yellow-500/20 text-sm font-medium">
+              <div className="flex items-center gap-2 px-2 py-1 rounded-full bg-yellow-500/10 text-yellow-600 border border-yellow-500/20 text-sm font-medium">
                 <Clock className="w-4 h-4 animate-spin-slow" />
                 <span>Analysis in Progress</span>
               </div>
@@ -495,7 +495,7 @@ const ReviewItem = ({ review }: { review: Review }) => {
               isOpen && "bg-background border-primary/20",
             )}
           >
-            <span className="flex items-center gap-2 font-semibold">
+            <span className="flex items-center gap-2 font-medium">
               <LuActivity
                 className={cn("w-4 h-4", isOpen && "animate-pulse")}
               />
