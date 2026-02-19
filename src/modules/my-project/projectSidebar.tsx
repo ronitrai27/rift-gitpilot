@@ -44,6 +44,7 @@ import {
   Link2,
   Mic,
   Code,
+  Palette,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -62,6 +63,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ThemeButtons } from "../dashboard/ThemeButton";
 
 const workspaceMenu = [
   {
@@ -90,8 +92,6 @@ const workspaceMenu = [
     icon: Code,
   },
 ];
-
-
 
 export default function ProjectSidebar() {
   const { theme, setTheme } = useTheme();
@@ -257,45 +257,38 @@ export default function ProjectSidebar() {
           })}
         </SidebarMenu>
 
-        {/* AI MENU  */}
-        {/* <SidebarMenu className="px-1">
-          <Collapsible asChild className="group/collapsible">
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={aiMenu.label} className="w-full">
-                  <aiMenu.icon className="h-5 w-5 text-muted-foreground" />
-                  <span className="text-base text-muted-foreground">
-                    {aiMenu.label}
-                  </span>
-                  <ChevronRight className="ml-auto h-4 w-4 transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  {aiMenu.items.map((item) => {
-                    const Icon = item.icon;
-                    const href = `/dashboard/my-projects/${projectId}/${item.path}`;
-                    return (
-                      <SidebarMenuSubItem key={item.path}>
-                        <SidebarMenuSubButton asChild isActive={isActive(href)}>
-                          <Link
-                            href={href}
-                            className="flex items-center gap-2 "
-                          >
-                            <Icon className="h-4 w-4" />
-                            <span className="text-sm font-light">
-                              {item.label}
-                            </span>
-                          </Link>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    );
-                  })}
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </SidebarMenuItem>
-          </Collapsible>
-        </SidebarMenu> */}
+        {/* THEME SWITCHER */}
+        <Popover>
+          <SidebarMenuButton asChild className="group relative overflow-hidden">
+            <PopoverTrigger asChild>
+              <button
+                type="button"
+                className="relative z-10 flex w-full items-center gap-3 px-3 py-2 text-muted-foreground data-[active=true]:text-white"
+              >
+                <Palette className="h-5 w-5" />
+                <span className="text-base">Theme</span>
+
+                {/* Active gradient */}
+                <span
+                  className="
+            pointer-events-none absolute inset-0 -z-10
+            opacity-0 transition-opacity
+            group-data-[active=true]:opacity-100
+            bg-linear-to-l from-blue-600/50 via-transparent to-transparent
+          "
+                />
+              </button>
+            </PopoverTrigger>
+          </SidebarMenuButton>
+
+          <PopoverContent
+            align="start"
+            side="right"
+            className="w-48 rounded-lg p-2"
+          >
+            <ThemeButtons />
+          </PopoverContent>
+        </Popover>
       </SidebarContent>
 
       {/* ───────── FOOTER ───────── */}

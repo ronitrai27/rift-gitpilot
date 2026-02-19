@@ -871,6 +871,7 @@ export const getProjectTeamSkills = query({
       const user = await ctx.db.get(userId as Id<"users">);
       if (user) {
         teamSkills.push({
+          userId: user._id,
           userName: user.name,
           skills: user.skills || [],
         });

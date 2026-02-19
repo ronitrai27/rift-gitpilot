@@ -101,9 +101,11 @@ const issueTypeConfig = {
 const IssueCard = ({
   issue,
   projectId,
+  isProcessing = false,
 }: {
   issue: Issue;
   projectId: Id<"projects">;
+  isProcessing?: boolean;
 }) => {
   const [open, setOpen] = React.useState(false);
   const [showAssignees, setShowAssignees] = React.useState(false);
@@ -154,7 +156,7 @@ const IssueCard = ({
         onClick={() => setOpen(true)}
         className={cn(
           "group relative flex flex-col gap-2 p-3.5 rounded-lg cursor-pointer",
-          "border border-border/40 border-l-[3px]",
+          "border border-border border-l-[3px]",
           "bg-card/60 backdrop-blur-sm",
           "hover:shadow-md hover:border-border/70 hover:bg-card/90",
           "transition-all duration-200",
@@ -207,7 +209,12 @@ const IssueCard = ({
 
           {/* Assigned To Avatar / Assign Button */}
           <div className="flex items-center gap-1.5">
-            {issue.issueAssignedTo ? (
+            {isProcessing ? (
+              <div className="flex items-center gap-2 px-2 py-1 rounded-md bg-primary/5 border border-primary/20 animate-pulse">
+                <Bot className="w-3.5 h-3.5 text-primary animate-bounce" />
+                <span className="text-[10px] font-medium text-primary uppercase tracking-tighter">Analyzing...</span>
+              </div>
+            ) : issue.issueAssignedTo ? (
               <div 
                 className="flex items-center gap-1.5 cursor-pointer hover:bg-primary/5 p-1 rounded-md transition-colors"
                 onClick={(e) => {
@@ -471,18 +478,6 @@ const ReviewItem = ({ review }: { review: Review }) => {
           </motion.div>
         )}
 
-        {/* 5. Created this at? (using fns to format)
-        <div className="flex items-center gap-2 text-xs text-muted-foreground italic">
-          <Clock className="w-3 h-3" />
-          <span>
-            Created at{" "}
-            {format(
-              review._creationTime || review.createdAt,
-              "MMMM do, yyyy 'at' h:mm:ss a",
-            )}
-          </span>
-        </div> */}
-
         {/* 6. Toggle button to show the review! with interactive ui */}
         <div className="flex items-center gap-2 pt-2">
           <Button
@@ -575,6 +570,67 @@ const ActivityFeed = () => {
   const issues = useQuery(api.repos.getIssuesByRepoId, {
     repoId: project?.repositoryId!,
   });
+
+  const [processingIssues, setProcessingIssues] = React.useState<Set<Id<"issues">>>(new Set());
+  const processingRef = React.useRef(new Set<Id<"issues">>());
+
+  // Auto-assign logic
+  React.useEffect(() => {
+    const pendingIssues = issues?.filter(i => i.issueStatus === "pending") || [];
+    
+    pendingIssues.forEach(async (issue) => {
+      if (processingRef.current.has(issue._id)) return;
+
+      processingRef.current.add(issue._id);
+      setProcessingIssues(prev => new Set(prev).add(issue._id));
+      
+      const toastId = toast.loading(`Agent: New Issue Detected`, {
+        description: `Analyzing skills for "${issue.issueTitle.slice(0, 20)}..."`,
+        icon: <Bot className="w-4 h-4 text-primary" />,
+      });
+
+      try {
+        const response = await fetch("/api/agent/auto-assign", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            projectId,
+            issueId: issue._id,
+            messages: [
+              {
+                role: "user",
+                content: `Please assign this issue: "${issue.issueTitle}". Description: ${issue.issueDescription}`,
+              },
+            ],
+          }),
+        });
+
+        if (!response.ok) throw new Error("Failed to reach assignment agent");
+
+        await response.text(); 
+        
+        toast.success(`Autonomous Assignment`, {
+          id: toastId,
+          description: `Issue has been successfully delegated to the best match.`,
+          icon: <CheckCircle2 className="w-4 h-4 text-emerald-500" />,
+        });
+      } catch (error) {
+        console.error("Auto-assign error:", error);
+        toast.error("Agent Offline", { 
+          id: toastId,
+          description: "Manual assignment required for this issue.",
+          icon: <AlertTriangle className="w-4 h-4 text-amber-500" />,
+        });
+        processingRef.current.delete(issue._id);
+      } finally {
+        setProcessingIssues(prev => {
+          const next = new Set(prev);
+          next.delete(issue._id);
+          return next;
+        });
+      }
+    });
+  }, [issues, projectId]);
 
   // Loading state
   if (reviews === undefined || issues === undefined) {
@@ -689,6 +745,7 @@ const ActivityFeed = () => {
                   key={issue._id}
                   issue={issue}
                   projectId={projectId}
+                  isProcessing={processingIssues.has(issue._id)}
                 />
               ))
             )}
