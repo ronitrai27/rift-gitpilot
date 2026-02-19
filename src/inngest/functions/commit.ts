@@ -85,10 +85,10 @@ Provide:
 2. **walkthrough**: Array of file-by-file explanations with context (keep it short)
 3. **sequenceDiagram**: A Mermaid sequence diagram showing the flow of changes (if applicable). Use simple syntax, avoid special characters in labels.
 4. **criticalIssues** (optional)
-   - Include ONLY if there are MAJOR or CRITICAL issues.
+   - Include ONLY if there are MAJOR or CRITICAL issues or code that can cause errors.
    - Maximum 1-2 issues.
    - Ignore minor suggestions, refactors, style, or optimizations.
-   - Must have: title, file eg (src/app/folder/file), line (optional), description, and fix
+   - Must have: title, file eg (src/app/folder/file), line (optional), description, and fix ( how to fix it)
    - Must be respond in markdown format
    -Be precise. Do not invent problems. Only flag issues with strong confidence`,
       });
