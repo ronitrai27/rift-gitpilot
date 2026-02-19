@@ -18,13 +18,13 @@ export function getInviteLink(inviteCode: string): string {
 }
 
 export function shareViaWhatsApp(link: string, projectName: string) {
-  const text = encodeURIComponent(`Join my project "${projectName}" on WeKraft: ${link}`);
+  const text = encodeURIComponent(`Join my project "${projectName}" on Gitpilot: ${link}`);
   window.open(`https://wa.me/?text=${text}`, "_blank");
 }
 
 export function shareViaGmail(link: string, projectName: string) {
   const subject = encodeURIComponent(`Invitation to join project: ${projectName}`);
-  const body = encodeURIComponent(`Hi,\n\nI'd like to invite you to collaborate on my project "${projectName}" on WeKraft.\n\nYou can join using this link: ${link}\n\nBest regards!`);
+  const body = encodeURIComponent(`Hi,\n\nI'd like to invite you to collaborate on my project "${projectName}" on Gitpilot.\n\nYou can join using this link: ${link}\n\nBest regards!`);
   window.open(`mailto:?subject=${subject}&body=${body}`, "_blank");
 }
 

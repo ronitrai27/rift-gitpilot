@@ -2,6 +2,10 @@
 
 convex/_generated/
 
+bin/
+*.exe
+
+
 # dependencies
 /node_modules
 /.pnp

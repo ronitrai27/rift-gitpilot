@@ -160,3 +160,52 @@ export const getIssueTool = query({
     };
   },
 });
+
+// --------------------------------------
+// -------------ASSIGN ISSUE-------------
+// ---------------------------------------
+export const assignIssue = mutation({
+  args: {
+    issueId: v.id("issues"),
+    userId: v.id("users"),
+  },
+  handler: async (ctx, args) => {
+    // const identity = await ctx.auth.getUserIdentity();
+    // if (!identity) {
+    //   throw new Error("Unauthenticated");
+    // }
+
+    const issue = await ctx.db.get(args.issueId);
+    if (!issue) {
+      throw new Error("Issue not found");
+    }
+
+    await ctx.db.patch(args.issueId, {
+      issueAssignedTo: args.userId,
+      issueStatus: "assigned",
+      issueUpdatedAt: Date.now(),
+    });
+
+    return { success: true };
+  },
+});
+
+// --------------------------------------
+// -------------UPDATE ISSUE ASSIGNED TO-------------
+// --------------------------------------
+export const updateIssueAssignedTo = mutation({
+  args: {
+    issueId: v.id("issues"),
+    userId: v.id("users"),
+  },
+  handler: async (ctx, args) => {
+    // const identity = await ctx.auth.getUserIdentity();
+    // if (!identity) throw new Error("Unauthenticated");
+
+    await ctx.db.patch(args.issueId, {
+      issueAssignedTo: args.userId,
+      issueUpdatedAt: Date.now(),
+    });
+    return { success: true };
+  },
+});

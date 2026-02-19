@@ -264,7 +264,7 @@ export function MultiStepOnboarding() {
                       Identity <LucideUser className="w-5 h-5 inline ml-2" />
                     </h2>
                     <p className="text-muted-foreground">
-                      Hey Dev. Welcome to WeKraft. Let's get started.
+                      Hey Dev. Welcome to Gitpilot. Let's get started.
                     </p>
                   </div>
 

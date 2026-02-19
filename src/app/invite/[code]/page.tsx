@@ -90,8 +90,8 @@ const InvitePage = () => {
 
         <div className="absolute top-6 left-6 flex z-50 bg-white/10 p-5 rounded-lg backdrop-blur-md border border-white/10">
           <div className="flex items-center gap-3">
-            <Image src="/logo.svg" alt="logo" width={35} height={35} />
-            <h1 className="text-xl font-bold text-white">WeKraft</h1>
+            <Image src="/logo1.svg" alt="logo" width={35} height={35} />
+            <h1 className="text-xl font-bold text-white">Gitpilot</h1>
           </div>
           <div className="ml-4 flex items-center gap-2 text-white">
             <Loader2 className="w-4 h-4 animate-spin" />
@@ -118,8 +118,8 @@ const InvitePage = () => {
         {/* main page */}
         <div className=" flex flex-col z-50 bg-white/10 p-3 rounded-lg backdrop-blur-md w-full max-w-md">
           <div className="flex items-center gap-3 justify-center w-full">
-            <Image src="/logo.svg" alt="logo" width={35} height={35} />
-            <h1 className="text-xl font-bold text-white">WeKraft</h1>
+            <Image src="/logo1.svg" alt="logo" width={35} height={35} />
+            <h1 className="text-xl font-bold text-white">Gitpilot</h1>
           </div>
 
           <div className="text-center">
@@ -149,8 +149,8 @@ const InvitePage = () => {
       {/* Invite Card */}
       <div className="z-10 bg-white/10 p-4 rounded-lg backdrop-blur-md max-w-md w-full">
         <div className="flex items-center gap-3 w-full justify-center my-4">
-          <Image src="/logo.svg" alt="logo" width={35} height={35} />
-          <h1 className="text-xl font-bold text-white">WeKraft</h1>
+          <Image src="/logo1.svg" alt="logo" width={35} height={35} />
+          <h1 className="text-xl font-bold text-white">Gitpilot</h1>
         </div>
         <div className="text-center mb-6">
           <p className="text-white text-base mb-2">

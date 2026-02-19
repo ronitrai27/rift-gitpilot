@@ -25,7 +25,7 @@ interface ImpactScoreResult {
 }
 
 /**
- * WeKraft Impact Score — Explanation
+ * Gitpilot Impact Score — Explanation
  * ---------------------------------
  *
  * GOAL:

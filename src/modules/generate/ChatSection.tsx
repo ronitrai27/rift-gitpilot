@@ -467,7 +467,7 @@ const ChatSection = ({
               <ConversationEmptyState
                 icon={<MessageSquare className="size-12" />}
                 title="Start a conversation"
-                description="Imagine anything and let Wekraft AI create it for you!"
+                description="Imagine anything and let Gitpilot AI create it for you!"
               />
             ) : (
               <>

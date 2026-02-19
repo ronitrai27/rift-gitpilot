@@ -114,14 +114,14 @@ export const AppSidebar = () => {
       <SidebarHeader className="border-b ">
         <div className="flex items-center justify-between px-3 py-3">
           <Image
-            src="/logo.svg"
+            src="/logo1.svg"
             alt="Logo"
             width={30}
             height={30}
             className="cursor-pointer"
           />
-          <h1 className="font-bold text-xl group-data-[collapsible=icon]:hidden">
-            We<span className="italic">Kraft</span>
+          <h1 className="font-bold text-xl tracking-wide group-data-[collapsible=icon]:hidden">
+            Gitpilot
           </h1>
           {/* DROPDOWN ICON TO CHOOSE AMON USER CREATED PROJECTS  */}
           <Popover>

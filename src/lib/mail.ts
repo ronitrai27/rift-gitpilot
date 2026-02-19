@@ -19,7 +19,7 @@ export async function sendEmail({
 }) {
   try {
     const info = await transporter.sendMail({
-      from: `"WeKraft AI" <${process.env.EMAIL_USER}>`,
+      from: `"Gitpilot AI" <${process.env.EMAIL_USER}>`,
       to,
       subject,
       text: body,

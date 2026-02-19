@@ -192,8 +192,8 @@ Repository: ${repoId}
 Issues Found:
 ${issueList}
 
-Please review immediately inside WeKraft dashboard.
- WeKraft AI
+Please review immediately inside Gitpilot dashboard.
+ Gitpilot AI
 `;
 
       await sendEmail({

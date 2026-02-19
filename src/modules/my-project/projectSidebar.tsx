@@ -121,7 +121,7 @@ export default function ProjectSidebar() {
       <SidebarHeader className="border-b ">
         <div className="flex items-center justify-between gap-4 px-3 py-2">
           <Image
-            src="/logo.svg"
+            src="/logo1.svg"
             alt="Logo"
             width={30}
             height={30}
