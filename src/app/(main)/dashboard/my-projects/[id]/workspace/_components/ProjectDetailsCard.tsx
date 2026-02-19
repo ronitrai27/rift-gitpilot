@@ -240,14 +240,14 @@ export default function ProjectDetailsCard({
   ];
 
   return (
-    <div className="flex flex-col gap-5 p-5 rounded-2xl border bg-muted/40 shadow-sm">
+    <div className="flex flex-col gap-5 p-5 rounded-2xl border bg-linear-to-br from-muted to-transparent shadow-sm">
       {/* ── Header ── */}
       <div className="flex flex-col gap-0.5">
         <h2 className="text-lg font-bold tracking-tight flex items-center gap-2">
           Recents Contributions & Issues
           <RefreshCw className="size-3.5 text-muted-foreground cursor-pointer hover:text-foreground transition-colors" />
         </h2>
-        <p className="text-xs text-muted-foreground">Issue resolution timeline</p>
+        <p className="text-xs text-muted-foreground">Contributions & Issues resolution timeline</p>
       </div>
 
       {/* ── 4 Stat Boxes ── */}
@@ -312,7 +312,7 @@ export default function ProjectDetailsCard({
       </div>
 
       {/* ── Tabs ── */}
-      <div className="flex gap-1 border-b border-border/50 pb-0">
+      <div className="flex gap-1 border-b border-border/50 pb-0 bg-white/10">
         {tabs.map((tab) => (
           <button
             key={tab.key}
