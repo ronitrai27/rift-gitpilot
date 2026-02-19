@@ -693,6 +693,27 @@ export const getProjectMembers = query({
   },
 });
 
+export const getProjectMembersWithSkills = query({
+  args: { projectId: v.id("projects") },
+  handler: async (ctx, args) => {
+    const members = await ctx.db
+      .query("projectMembers")
+      .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
+      .collect();
+
+    const membersWithSkills = await Promise.all(
+      members.map(async (member) => {
+        const user = await ctx.db.get(member.userId);
+        return {
+          ...member,
+          skills: user?.skills || [],
+        };
+      })
+    );
+    return membersWithSkills;
+  },
+});
+
 // ===============================================
 export const createReview = mutation({
   args: {

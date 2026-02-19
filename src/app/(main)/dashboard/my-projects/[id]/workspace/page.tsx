@@ -5,6 +5,7 @@ import {
   ChevronLeft,
   Copy,
   GitCompareArrows,
+  GitFork,
   LucideCheckCircle2,
   MessageSquare,
   RefreshCw,
@@ -19,6 +20,8 @@ import { Orb } from "@/components/elevenLabs/Orb";
 import DialogOrb from "./_components/DialogOrb";
 import { toast } from "sonner";
 import { useQuery } from "convex/react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -67,6 +70,7 @@ import {
   LuClock3,
   LuCrosshair,
   LuLayers2,
+  LuUsers,
 } from "react-icons/lu";
 
 const ProjectWorkspace = () => {
@@ -81,6 +85,9 @@ const ProjectWorkspace = () => {
   // Fetch project to get the repositoryId
   const project = useQuery(api.projects.getProjectById, { projectId });
   const project_details = useQuery(api.projects.getProject_Details, {
+    projectId,
+  });
+  const members = useQuery(api.projects.getProjectMembersWithSkills, {
     projectId,
   });
   const projectName = project?.projectName;
@@ -176,12 +183,94 @@ const ProjectWorkspace = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
+            className="h-full w-full flex flex-col"
           >
-            its completed
-            <br />
-            timeline chart
-            <br />
-            velocity (how much each task is been completed in time)
+            <div className="flex flex-col gap-8 mt-4">
+              {/* Header */}
+              <div className="flex flex-col gap-2">
+                <h1 className="text-2xl font-bold flex items-center gap-3">
+                  CI/CD workflow{" "}
+                  <GitFork className="inline size-7 text-primary" />
+                </h1>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <span className="p-1 rounded bg-blue-600/40">
+                    <LuActivity className="size-4" />
+                  </span>
+                  <div className="flex items-center gap-3">
+                    <p className="text-base font-mono">
+                      {project.repoFullName}
+                    </p>
+                    <p className="text-xs bg-green-500/10 border border-green-500/30 py-1 px-3 rounded-full text-green-500">
+                      Connected <LuActivity className="inline size-4" />
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Project Members */}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+                  <LuUsers className="size-4" /> Team Members
+                </h3>
+                <div className="flex flex-wrap gap-4">
+                  {members?.map((member) => (
+                    <div
+                      key={member._id}
+                      className="flex items-center gap-3 bg-muted/30 p-2 rounded-xl border border-border/50 hover:bg-muted/50 transition-colors"
+                    >
+                      <Avatar size="default" className="border">
+                        <AvatarImage src={member.userImage} />
+                        <AvatarFallback>{member.userName?.[0]}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium leading-none">
+                          {member.userName}
+                        </span>
+                        <div className="flex gap-1 mt-1.5">
+                          {member.skills?.slice(0, 3).map((skill, i) => (
+                            <Badge
+                              key={i}
+                              variant="secondary"
+                              className="text-[10px] px-1 rounded-sm h-4"
+                            >
+                              {skill}
+                            </Badge>
+                          ))}
+                          {(member.skills?.length ?? 0) > 3 && (
+                            <span className="text-[10px] text-muted-foreground">
+                              +{(member.skills?.length ?? 0) - 3}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Project Details (Timeline & Overview) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex flex-col gap-3 p-5 rounded-2xl border bg-card/50 shadow-sm">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+                    <LuClock3 className="size-4 text-blue-500" /> Project
+                    Timeline
+                  </h3>
+                  <p className="text-sm leading-relaxed text-foreground/80">
+                    {project_details?.projectTimeline || "No timeline defined."}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 p-5 rounded-2xl border bg-card/50 shadow-sm">
+                  <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+                    <LuLayers2 className="size-4 text-emerald-500" /> Project
+                    Overview
+                  </h3>
+                  <p className="text-sm leading-relaxed text-foreground/80">
+                    {project_details?.projectOverview ||
+                      "No overview available."}
+                  </p>
+                </div>
+              </div>
+            </div>
           </motion.div>
         ) : (
           <motion.main
