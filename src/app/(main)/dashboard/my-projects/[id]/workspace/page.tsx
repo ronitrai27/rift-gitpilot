@@ -233,7 +233,7 @@ const ProjectWorkspace = () => {
               </div>
 
               {/* Project Members */}
-              <div className="flex flex-col gap-3">
+              {/* <div className="flex flex-col gap-3">
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground flex items-center justify-center gap-2">
                   <LuUsers className="size-4" /> Team Members
                 </h3>
@@ -271,15 +271,17 @@ const ProjectWorkspace = () => {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               {/* Project Details — CI/CD Pipeline */}
-              <ProjectDetailsCard
-                projectTimeline={project_details?.projectTimeline}
-                stats={workspaceStats ?? null}
-                issues={workspaceIssues ?? []}
-                reviews={workspaceReviews ?? []}
-              />
+              <div className="w-full px-8">
+                <ProjectDetailsCard
+                  projectTimeline={project_details?.projectTimeline}
+                  stats={workspaceStats ?? null}
+                  issues={workspaceIssues ?? []}
+                  reviews={workspaceReviews ?? []}
+                />
+              </div>
             </div>
           </motion.div>
         ) : (

@@ -149,7 +149,7 @@ function StatBox({
   sub,
   color,
 }: {
-  icon: React.ElementType;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   label: string;
   value: string | number;
   sub: string;
@@ -244,7 +244,7 @@ export default function ProjectDetailsCard({
       {/* ── Header ── */}
       <div className="flex flex-col gap-0.5">
         <h2 className="text-lg font-bold tracking-tight flex items-center gap-2">
-          CI/CD Pipeline
+          Recents Contributions & Issues
           <RefreshCw className="size-3.5 text-muted-foreground cursor-pointer hover:text-foreground transition-colors" />
         </h2>
         <p className="text-xs text-muted-foreground">Issue resolution timeline</p>
