@@ -71,11 +71,11 @@ A premium, glassmorphic React dashboard acting as mission control:
 graph TD
     User[User / Developer] -->|Pushes Code| GitHub[GitHub Repo]
     GitHub -->|Webhook| Inngest[Inngest Orchestration]
-    Inngest -->|Trigger| Gemini[Gemini 2.5 Flash]
-    Multi-Agent -->|Analyze & Review| Convex[Convex Realtime DB]
+    Inngest -->|Trigger| Multi-Agents
+Multi-Agents -->|Analyze & Review| Convex[Convex Realtime DB]
     Convex -->|Sync| Dashboard[Next.js Dashboard]
     Dashboard -->|Auth| Clerk[Clerk Auth]
-    Gemini -->|Vector Search| Pinecone[Pinecone RAG]
+    Multi-Agents -->|Vector Search| Pinecone[Pinecone RAG]
 ```
 
 ### Tech Stack
