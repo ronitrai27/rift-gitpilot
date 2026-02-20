@@ -24,12 +24,14 @@
 > Built for teams that want a **teammate**, not just a dashboard.
 
 ---
+<div align="center">
 
-## 📹 Video Demo
+<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=900&size=60&pause=1000&color=6366F1&center=true&vCenter=true&width=600&height=100&lines=TEAM+ROX" alt="Team ROX" />
+</div>
 
+### *BUILD AN AUTONOMOUS CI/CD HEALING AGENT*
 [**Watch Demo**](https://drive.google.com/file/d/1qqjxeeRt4RPjxDlg2LpJO4TNJB0haKk2/view?usp=sharing)
 
-_Click the image above to watch the full demo._
 
 ---
 
@@ -174,7 +176,7 @@ Open [http://localhost:3000](http://localhost:3000) to access your Gitpilot inst
 
 ---
 
-## 👥 Team
+## 👥 Team ROX
 
 - **Ritesh Sinha**
 - **Ronit Rai**
