@@ -202,7 +202,7 @@ Please review immediately inside Gitpilot dashboard.
         body: emailBody,
       });
     });
-
+    
     return {
       success: true,
       reviewId,

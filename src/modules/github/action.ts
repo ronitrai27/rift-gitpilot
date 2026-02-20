@@ -1244,3 +1244,21 @@ export const getRepoFolderStructure = async (
     return "";
   }
 };
+
+// ----------------------------------------------------------
+
+// export async function postReviewComment(
+//   token: string,
+//   owner: string,
+//   repo: string,
+//   prNumber: number,
+//   review: string
+// ) {
+//   const octokit = new Octokit({ auth: token });
+//   await octokit.rest.issues.createComment({
+//     owner,
+//     repo,
+//     issue_number: prNumber,
+//     body: `## AI CODE REVIEW \n\n${review} \n\n -------\n *Powered By Line-Queue*`,
+//   });
+// }
