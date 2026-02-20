@@ -11,6 +11,8 @@
 [![Inngest](https://img.shields.io/badge/Inngest-Orchestration-purple?style=flat-square)](https://inngest.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
+[**View Deployment**](https://ritesh-rift.vercel.app/) · [**Watch Demo**]([#-video-demo](https://drive.google.com/file/d/1qqjxeeRt4RPjxDlg2LpJO4TNJB0haKk2/view?usp=sharing)) · [**Report Bug**](https://github.com/ronitrai27/rift-gitpilot/issues)
+
 </div>
 
 ---
@@ -23,83 +25,86 @@
 
 ---
 
+## 📹 Video Demo
+
+[![Gitpilot Demo](https://img.youtube.com/vi/PLACEHOLDER_VIDEO_ID/0.jpg)]([https://drive.google.com/file/d/1qqjxeeRt4RPjxDlg2LpJO4TNJB0haKk2/view?usp=sharing])
+
+_Click the image above to watch the full demo._
+
+---
+
 ## ✨ Key Features
 
 ### 🤖 Autonomous Auto-Assign Agent
+
 Stop manually routing Jira tickets. The **Auto-Assign Agent** analyzes every new issue and dynamically matches it to the most qualified team member based on their past contributions and expertise.
 
 **Workflow:** New Issue Opened → Fetch Team Skills → Evaluate Best Match → Assign & Notify
 
----
-
 ### 🔍 Intelligent Commit Analysis
-Gitpilot doesn't just watch commits — it understands them.
 
-- **File-by-file diff analysis** for deep contextual understanding
-- **Critical detection** of logic errors, security flaws, and bad practices
-- **Auto-generated Mermaid.js sequence diagrams** to visualize complex logic changes
+Gitpilot creates a semantic understanding of your code changes:
 
----
+- **File-by-file diff analysis**: Context-aware review using Gemini 2.5 Flash.
+- **Critical Issue Detection**: Identifies logic errors, security flaws, and critical failures.
+- **Auto-generated Diagrams**: Visualizes complex logic changes with Mermaid.js.
 
 ### 🗺️ Repository Visualization
+
 An interactive **3D / Tree-based Visualizer** that maps your entire codebase and highlights **Risk Heatmaps** — pinpointing areas of high complexity or recurring bugs at a glance.
 
----
-
 ### 📊 Interactive Team Dashboard
-A premium, glassmorphic React dashboard that serves as mission control:
 
-| Panel | Description |
-|---|---|
-| **Review Feed** | Live stream of AI-generated code reviews |
+A premium, glassmorphic React dashboard acting as mission control:
+
+| Panel             | Description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| **Review Feed**   | Live stream of AI-generated code reviews                     |
 | **Issue Tracker** | Kanban-style board for agent-created and user-created issues |
-| **Team Stats** | Real-time visibility into who is working on what |
+| **Team Stats**    | Real-time visibility into who is working on what             |
 
 ---
 
 ## 🏗️ Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        GITPILOT                             │
-│                                                             │
-│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐   │
-│  │   Frontend   │    │   Backend    │    │  AI & Jobs   │   │
-│  │              │    │              │    │              │   │
-│  │  Next.js 14  │◄──►│    Convex    │◄──►│   Gemini     │   │
-│  │  Shadcn/UI   │    │    (RT DB)   │    │  2.5 Flash   │   │
-│  │  Tailwind    │    │    Clerk     │    │   Inngest    │   │
-│  │  Framer      │    │   Pinecone   │    │  (Workflows) │   │
-│  └──────────────┘    └──────────────┘    └──────────────┘   │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    User[User / Developer] -->|Pushes Code| GitHub[GitHub Repo]
+    GitHub -->|Webhook| Inngest[Inngest Orchestration]
+    Inngest -->|Trigger| Gemini[Gemini 2.5 Flash]
+    Multi-Agent -->|Analyze & Review| Convex[Convex Realtime DB]
+    Convex -->|Sync| Dashboard[Next.js Dashboard]
+    Dashboard -->|Auth| Clerk[Clerk Auth]
+    Gemini -->|Vector Search| Pinecone[Pinecone RAG]
 ```
 
-### Frontend
-- **Framework:** Next.js 16+ (App Router)
-- **UI:** Shadcn/UI + Tailwind CSS + Framer Motion
-- **Visualization:** React Flow / Custom Canvas
+### Tech Stack
 
-### Backend & Data
-- **Database:** Convex — Real-time, serverless data sync
-- **Auth:** Clerk — Secure user management
-- **Vector DB:** Pinecone — Codebase semantic knowledge base
-
-### AI & Automation
-- **LLM:** Google Gemini 2.5 Flash — High-speed, large context window
-- **Orchestration:** Inngest — Reliable background jobs & multi-step agent workflows
+- **Frontend:** Next.js 16 (App Router), React 19, Shadcn/UI, Tailwind CSS, Framer Motion, React Flow
+- **Backend:** Convex (Real-time DB), Clerk (Auth), Inngest (Background Jobs & Workflows)
+- **AI & Data:** Google Gemini 2.5 Flash, Pinecone (Vector DB), Google AI SDK
+- **Tools:** Biome, TypeScript
 
 ---
 
-## 🗺️ Challenge Solution Mapping
+## 🐛 Supported Bug Types
 
-| Challenge Requirement | Gitpilot Feature | Implementation |
-|---|---|---|
-| Input Interface | Smart Onboarding Flow | Multi-step repo connection with metadata import and team invite |
-| Analyze Repository | RAG & Semantic Indexing | Full codebase indexed via Pinecone RAG |
-| Discover Failures & Fixes | AI Commit Analysis | Gemini 2.5 Flash scans every push for bugs and security risks |
-| Run Tests & Verify | Predictive Static Analysis | LLM-powered build failure prediction at commit time |
-| Commit Fixes | Agent Reviews & Issues | Autonomous GitHub Issues with suggested patches |
-| React Dashboard | Real-time Activity Feed | Live dashboard with repo health, issues, and team stats |
+Gitpilot's AI analyzer is specifically tuned to detect:
+
+1.  **Logic Errors** (e.g., Infinite loops, incorrect conditional logic)
+2.  **Security Flaws** (e.g., Hardcoded API keys, injection vulnerabilities)
+3.  **Critical Failures** (e.g., Unhandled exceptions, type mismatches that break build)
+4.  **Severe Bad Practices** (e.g., Anti-patterns that significantly degrade performance)
+
+_Note: The agent is configured to report only high-confidence, critical issues (Max 2 per commit) to reduce noise._
+
+---
+
+## ⚠️ Known Limitations
+
+- **Context Window**: Analysis is currently optimized for files under 4,000 characters to ensure speed and accuracy.
+- **Critical Issue Cap**: To prevent alert fatigue, only the top 2 most critical issues are reported per commit.
+- **Webhook Requirement**: Local development requires a public tunnel (ngrok) for GitHub webhooks to trigger Inngest functions.
 
 ---
 
@@ -113,73 +118,71 @@ A premium, glassmorphic React dashboard that serves as mission control:
 
 ### Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/ronitrai27/rift-gitpilot
-cd gitpilot
+1.  **Clone the repository**
 
-# Install dependencies
-npm install
+    ```bash
+    git clone https://github.com/ronitrai27/rift-gitpilot
+    cd gitpilot
+    ```
 
-# Set up environment variables
-cp .env.example .env.local
-```
+2.  **Install dependencies**
 
+    ```bash
+    npm install
+    # or
+    pnpm install
+    ```
+
+3.  **Environment Setup**
+    Copy the example environment file:
+
+    ```bash
+    cp .env.example .env.local
+    ```
+
+    Fill in `env.local` with your keys:
+
+    ```env
+    NEXT_PUBLIC_CONVEX_URL=...
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+    CLERK_SECRET_KEY=...
+    GOOGLE_GENERATIVE_AI_API_KEY=...
+    INNGEST_EVENT_KEY=...
+    PINECONE_API_KEY=...
+    ```
 
 ### Run Locally
 
-```bash
-# Start the development server
-npm run dev
+1.  **Start the development server**
 
-# In a separate terminal, start Convex
-npx convex dev
+    ```bash
+    npm run dev
+    ```
 
-# In a separate terminal, start Inngest dev server
-npx inngest-cli@latest dev
-```
+2.  **Start Convex** (in a new terminal)
 
-Open [http://localhost:3000](http://localhost:3000) to access your local Gitpilot instance.
+    ```bash
+    npx convex dev
+    ```
 
----
+3.  **Start Inngest** (in a new terminal)
+    ```bash
+    npx inngest-cli@latest dev
+    ```
 
-## 🔮 Roadmap
-
-- [ ] **Active CI/CD Interception** — Directly trigger GitHub Actions and parse logs
-- [ ] **Self-Healing Code** — Automatically apply suggested fixes via Pull Requests
-- [ ] **Voice Interface** — Command the agent via voice input
-- [ ] **Slack / Discord Integration** — Get agent notifications in your team chat
-- [ ] **Multi-repo Support** — Manage an entire organization from one dashboard
+Open [http://localhost:3000](http://localhost:3000) to access your Gitpilot instance.
 
 ---
 
-## 📈 Impact
+## 👥 Team
 
-| Metric | Result |
-|---|---|
-| Admin overhead reduction | **40%** |
-| Bug detection stage | **Before deployment** (commit phase) |
-| Task assignment time | **Instant** (automated) |
-| Context window | **Large** (Gemini 2.5 Flash) |
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) and open a pull request.
-
-```bash
-# Fork and clone
-git checkout -b feature/your-feature-name
-
-# Make your changes, then
-git commit -m "feat: add your feature"
-git push origin feature/your-feature-name
-```
+- **Ritesh Sinha**
+- **Ronit Rai**
+- **Bhanu Pratap**
+- **Riya Kumari**
 
 ---
 
 ## 📄 License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
