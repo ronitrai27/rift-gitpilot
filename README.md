@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/Gitpilot-Autonomous%20DevOps%20Agent-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="Gitpilot Banner" />
+<img src="https://img.shields.io/badge/Gitpilot-Autonomous%20CI/CD%20Agent-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="Gitpilot Banner" />
 
 <h1>🚀 Gitpilot</h1>
 <p><strong>The Autonomous DevOps Agent that thinks, reviews, and acts — so your team doesn't have to.</strong></p>
