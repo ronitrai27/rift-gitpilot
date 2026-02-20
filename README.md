@@ -27,7 +27,7 @@
 
 ## 📹 Video Demo
 
-[![Gitpilot Demo](https://img.youtube.com/vi/PLACEHOLDER_VIDEO_ID/0.jpg)]([https://drive.google.com/file/d/1qqjxeeRt4RPjxDlg2LpJO4TNJB0haKk2/view?usp=sharing])
+[**Watch Demo**](https://drive.google.com/file/d/1qqjxeeRt4RPjxDlg2LpJO4TNJB0haKk2/view?usp=sharing)
 
 _Click the image above to watch the full demo._
 
