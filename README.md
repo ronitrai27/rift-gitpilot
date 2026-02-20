@@ -115,7 +115,7 @@ A premium, glassmorphic React dashboard that serves as mission control:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/gitpilot.git
+git clone https://github.com/ronitrai27/rift-gitpilot
 cd gitpilot
 
 # Install dependencies
