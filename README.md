@@ -11,7 +11,7 @@
 [![Inngest](https://img.shields.io/badge/Inngest-Orchestration-purple?style=flat-square)](https://inngest.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-[**View Deployment**](https://ritesh-rift.vercel.app/) · [**Watch Demo**]([#-video-demo](https://drive.google.com/file/d/1qqjxeeRt4RPjxDlg2LpJO4TNJB0haKk2/view?usp=sharing)) · [**Report Bug**](https://github.com/ronitrai27/rift-gitpilot/issues)
+[**View Deployment**](https://ritesh-rift.vercel.app/) · [**Watch Demo**](https://drive.google.com/file/d/1qqjxeeRt4RPjxDlg2LpJO4TNJB0haKk2/view?usp=sharing) · [**Report Bug**](https://github.com/ronitrai27/rift-gitpilot/issues)
 
 </div>
 
